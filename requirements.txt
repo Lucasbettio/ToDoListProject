@@ -6,3 +6,4 @@ sqlalchemy==2.0.25
 psycopg2-binary==2.9.9
 dynaconf==3.2.4
 PyJWT
+python-dotenv

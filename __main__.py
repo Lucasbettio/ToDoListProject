@@ -1,9 +1,7 @@
 from aiohttp import web
-from config import settings
-from log_config import configure
 from src.App import App
+from config import settings
 
-configure("toDoListProject")
 
 app = App()
 
