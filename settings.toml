@@ -1,0 +1,10 @@
+API_HOST = "0.0.0.0"
+API_PORT = 9000
+DB_DIALECT = "postgresql"
+DB_USER = "postgres"
+DB_PWD = "passwd123"
+DB_NAME = "ToDoListDB"
+DB_HOST = ""
+DB_PORT = 5432
+DB_POOL_SIZE = 20
+DB_POOL_OVERFLOW = 5

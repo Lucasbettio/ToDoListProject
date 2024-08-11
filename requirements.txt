@@ -1,0 +1,8 @@
+numpy==1.26.3
+aiohttp==3.9.3
+deepmerge==1.1.1
+aiohttp-cors==0.7.0
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+dynaconf==3.2.4
+PyJWT
