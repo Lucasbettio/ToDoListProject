@@ -56,6 +56,7 @@ class DataHandler:
             session = Session.object_session(self)
             session.delete(self)
             session.commit()
+            return True
 
         except Exception as e:
             print(str(e))

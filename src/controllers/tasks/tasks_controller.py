@@ -102,8 +102,7 @@ class TaskController:
             
             data = {
                 "id" : str(task.id),
-                "status" : task.status,
-                "data" : task.updated
+                "status" : task.status
             }
 
             return web.json_response(data)
@@ -114,3 +113,30 @@ class TaskController:
         finally:
             if "task_db" in locals():
                 task_db["session"].close()
+
+    async def delete_task(self, request):
+        try: 
+            recept_id = request.match_info.get("id")
+            task_db = Tasks.by_id(recept_id)
+
+            if not task_db:
+                return web.HTTPBadRequest(text = "Task not found")
+
+            task = task_db["data"]
+            deleted = task.delete()
+
+            if not deleted:
+                return web.HTTPBadRequest(text = "Error to delete your task")
+
+            data = {
+                "text": "Task deleted",
+            }
+
+            return web.json_response(data)
+
+        except Exception as e:
+            return web.HTTPBadRequest(text=str(e))
+
+        finally:
+            if "task_db" in locals():
+                task_db["session"].close() 
