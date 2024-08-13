@@ -9,5 +9,6 @@ async def _status():
 def tasks_routes(prefix):
     return[
         web.get(prefix + '/tasks', task_controller.get_tasks),
-        web.post(prefix + '/task', task_controller.create_task)
+        web.post(prefix + '/task', task_controller.create_task),
+        web.put(prefix + '/task/{id}', task_controller.update_task)
     ]

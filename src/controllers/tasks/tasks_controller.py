@@ -85,3 +85,32 @@ class TaskController:
         except Exception as e:
             return web.HTTPBadRequest(text=str(e))
             
+    async def update_task(self, request):
+        try:
+            task_id = request.match_info.get("id")
+            payload = await request.json() if request.has_body else {}
+
+            task_db = Tasks.by_id(task_id)
+            task = task_db["data"]
+            new_status = payload.get('status')
+            task.status = new_status
+            task.updated_at = datetime.now()
+            updated = task.update()
+
+            if not updated:
+                raise ValueError("Error to update task")
+            
+            data = {
+                "id" : str(task.id),
+                "status" : task.status,
+                "data" : task.updated
+            }
+
+            return web.json_response(data)
+        
+        except Exception as e:
+            return web.HTTPBadRequest(text=str(e))
+        
+        finally:
+            if "task_db" in locals():
+                task_db["session"].close()
